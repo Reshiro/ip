@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Ough... What do you want?
+-*-*-*-*-
+Oughkay, I've added this task:
+[T][ ] Feed fishes
+Now you have 1 tasks in the list.
+-*-*-*-*-
+-*-*-*-*-
+1. [T][ ] Feed fishes
+-*-*-*-*-
+-*-*-*-*-
+Oughh. I've added this task:
+[D][ ] Rub belly (by: Monday)
+Now you have 2 tasks in the list.
+-*-*-*-*-
+-*-*-*-*-
+1. [T][ ] Feed fishes
+2. [D][ ] Rub belly (by: Monday)
+-*-*-*-*-
+-*-*-*-*-
+Ough! I've marked this task as done:
+[T][X] Feed fishes
+-*-*-*-*-
+-*-*-*-*-
+Ough! I've marked this task as done:
+[D][X] Rub belly (by: Monday)
+-*-*-*-*-
+-*-*-*-*-
+1. [T][X] Feed fishes
+2. [D][X] Rub belly (by: Monday)
+-*-*-*-*-
+-*-*-*-*-
+Ough... I've marked this task as not done yet:
+[T][ ] Feed fishes
+-*-*-*-*-
+-*-*-*-*-
+1. [T][ ] Feed fishes
+2. [D][X] Rub belly (by: Monday)
+-*-*-*-*-
+-*-*-*-*-
+Got it. I've added this task:
+[E][ ] Aquarium meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+-*-*-*-*-
