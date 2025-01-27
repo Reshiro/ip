@@ -151,6 +151,38 @@ public class YoChan {
                     System.out.println(e.getMessage());
                     System.out.println("-*-*-*-*-");
                 }
+
+            // Delete the specified task from the list
+            } else if (userInput.startsWith("delete")) {
+                try {
+                    if (userInput.equals("delete")) {
+                        throw new YoChanException("Ough! Please specify which task to delete!");
+                    }
+                    int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                    if (taskNumber > 0 && taskNumber <= taskCount) {
+                        Task deletedTask = tasks[taskNumber - 1];
+                        // Shift remaining tasks to fill the gap
+                        for (int i = taskNumber - 1; i < taskCount - 1; i++) {
+                            tasks[i] = tasks[i + 1];
+                        }
+                        taskCount--;
+                        System.out.println("-*-*-*-*-");
+                        System.out.println("Ough! I've removed this task:");
+                        System.out.println(deletedTask);
+                        System.out.println("Now you have " + taskCount + " tasks in the list.");
+                        System.out.println("-*-*-*-*-");
+                    } else {
+                        throw new YoChanException("Ough! Please provide a valid task number to delete!");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("-*-*-*-*-");
+                    System.out.println("Ough! Please provide a valid task number after 'delete'!");
+                    System.out.println("-*-*-*-*-");
+                } catch (YoChanException e) {
+                    System.out.println("-*-*-*-*-");
+                    System.out.println(e.getMessage());
+                    System.out.println("-*-*-*-*-");
+                }
             } else {
                 System.out.println("-*-*-*-*-");
                 System.out.println("Ough!! Unknown command!");
