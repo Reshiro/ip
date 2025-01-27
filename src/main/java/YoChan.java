@@ -72,47 +72,83 @@ public class YoChan {
 
             // Add the todo task type into the list of Tasks
             } else if (userInput.startsWith("todo")) {
-                String description = userInput.substring(5);
-                tasks[taskCount] = new Todo(description);
-                taskCount++;
-                System.out.println("-*-*-*-*-");
-                System.out.println("Oughkay, I've added this task:");
-                System.out.println(tasks[taskCount - 1]);
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
-                System.out.println("-*-*-*-*-");
+                try {
+                    if (userInput.equals("todo")) {
+                        throw new YoChanException("Ough! The description of a todo cannot be empty!");
+                    }
+                    String description = userInput.substring(5).trim();
+                    if (description.isEmpty()) {
+                        throw new YoChanException("Ough! The description of a todo cannot be empty!");
+                    }
+                    tasks[taskCount] = new Todo(description);
+                    taskCount++;
+                    System.out.println("-*-*-*-*-");
+                    System.out.println("Oughkay, I've added this task:");
+                    System.out.println(tasks[taskCount - 1]);
+                    System.out.println("Now you have " + taskCount + " tasks in the list.");
+                    System.out.println("-*-*-*-*-");
+                } catch (YoChanException e) {
+                    System.out.println("-*-*-*-*-");
+                    System.out.println(e.getMessage());
+                    System.out.println("-*-*-*-*-");
+                }
 
             // Add the deadline task type into the list of Tasks
             } else if (userInput.startsWith("deadline")) {
-                String[] parts = userInput.substring(9).split(" /by ");
-                tasks[taskCount] = new Deadline(parts[0], parts[1]);
-                taskCount++;
-                System.out.println("-*-*-*-*-");
-                System.out.println("Oughh. I've added this task:");
-                System.out.println(tasks[taskCount - 1]);
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
-                System.out.println("-*-*-*-*-");
+                try {
+                    String details = userInput.substring(9).trim();
+                    if (details.isEmpty()) {
+                        throw new YoChanException("Ough! The description of a deadline cannot be empty!");
+                    }
+                    if (!details.contains("/by")) {
+                        throw new YoChanException("Ough! Please include /by in your deadline command!");
+                    }
+                    String[] parts = details.split(" /by ");
+                    if (parts.length != 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+                        throw new YoChanException("Ough! The format should be: deadline <description> /by <deadline>");
+                    }
+                    tasks[taskCount] = new Deadline(parts[0].trim(), parts[1].trim());
+                    taskCount++;
+                    System.out.println("-*-*-*-*-");
+                    System.out.println("Oughh. I've added this task:");
+                    System.out.println(tasks[taskCount - 1]);
+                    System.out.println("Now you have " + taskCount + " tasks in the list.");
+                    System.out.println("-*-*-*-*-");
+                } catch (YoChanException e) {
+                    System.out.println("-*-*-*-*-");
+                    System.out.println(e.getMessage());
+                    System.out.println("-*-*-*-*-");
+                }
 
             // Add the event task type into the list of Tasks
             } else if (userInput.startsWith("event")) {
                 try {
-                    // Extract the description, from, and to parts
-                    String[] parts = userInput.substring(6).split(" /from ");
-                    String description = parts[0];
+                    String details = userInput.substring(6).trim();
+                    if (details.isEmpty()) {
+                        throw new YoChanException("Ough! The description of an event cannot be empty!");
+                    }
+                    if (!details.contains("/from") || !details.contains("/to")) {
+                        throw new YoChanException("Ough! Please include both /from and /to in your event command!");
+                    }
+                    String[] parts = details.split(" /from ");
+                    if (parts.length != 2 || parts[0].trim().isEmpty()) {
+                        throw new YoChanException("Ough! The format should be: event <description> /from <start> /to <end>");
+                    }
                     String[] timeParts = parts[1].split(" /to ");
-                    String from = timeParts[0];
-                    String to = timeParts[1];
+                    if (timeParts.length != 2 || timeParts[0].trim().isEmpty() || timeParts[1].trim().isEmpty()) {
+                        throw new YoChanException("Ough! Please specify both start and end times!");
+                    }
 
-                    tasks[taskCount] = new Event(description, from, to);
+                    tasks[taskCount] = new Event(parts[0].trim(), timeParts[0].trim(), timeParts[1].trim());
                     taskCount++;
-
                     System.out.println("-*-*-*-*-");
-                    System.out.println("Got it. I've added this task:");
+                    System.out.println("Oughkay. I've added this task:");
                     System.out.println(tasks[taskCount - 1]);
                     System.out.println("Now you have " + taskCount + " tasks in the list.");
                     System.out.println("-*-*-*-*-");
-                } catch (Exception e) {
+                } catch (YoChanException e) {
                     System.out.println("-*-*-*-*-");
-                    System.out.println("Invalid event format! Use: event <description> /from <start> /to <end>");
+                    System.out.println(e.getMessage());
                     System.out.println("-*-*-*-*-");
                 }
             } else {
