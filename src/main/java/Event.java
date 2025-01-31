@@ -2,12 +2,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Represents an event with a start and end time.
+ * @author Michael Cheong (Reshiro)
+ */
 public class Event extends Task {
-    private LocalDateTime from;
-    private LocalDateTime to;
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private LocalDateTime from;
+    private LocalDateTime to;
 
+
+    /**
+     * Creates a new Event with the specified description, start time, and end time.
+     * @param description
+     * @param from
+     * @param to
+     * @throws YoChanException
+     */
     public Event(String description, String from, String to) throws YoChanException {
         super(description);
         try {
