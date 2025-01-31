@@ -1,3 +1,6 @@
+/**
+ * Represents a command given by the user.
+ */
 public abstract class Command {
     protected boolean isExit;
 
