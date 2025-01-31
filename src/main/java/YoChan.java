@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 public class YoChan {
@@ -33,6 +39,7 @@ public class YoChan {
                     int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
                     if (taskNumber > 0 && taskNumber <= taskCount) {
                         tasks[taskNumber - 1].mark();
+                        writeTasksToFile(tasks, taskCount);
                         System.out.println("-*-*-*-*-");
                         System.out.println("Ough! I've marked this task as done:");
                         System.out.println(tasks[taskNumber - 1]);
@@ -55,6 +62,7 @@ public class YoChan {
                     int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
                     if (taskNumber > 0 && taskNumber <= taskCount) {
                         tasks[taskNumber - 1].unmark();
+                        writeTasksToFile(tasks, taskCount);
                         System.out.println("-*-*-*-*-");
                         System.out.println("Ough... I've marked this task as not done yet:");
                         System.out.println(tasks[taskNumber - 1]);
@@ -82,6 +90,7 @@ public class YoChan {
                     }
                     tasks[taskCount] = new Todo(description);
                     taskCount++;
+                    writeTasksToFile(tasks, taskCount);
                     System.out.println("-*-*-*-*-");
                     System.out.println("Oughkay, I've added this task:");
                     System.out.println(tasks[taskCount - 1]);
@@ -109,6 +118,7 @@ public class YoChan {
                     }
                     tasks[taskCount] = new Deadline(parts[0].trim(), parts[1].trim());
                     taskCount++;
+                    writeTasksToFile(tasks, taskCount);
                     System.out.println("-*-*-*-*-");
                     System.out.println("Oughh. I've added this task:");
                     System.out.println(tasks[taskCount - 1]);
@@ -141,6 +151,7 @@ public class YoChan {
 
                     tasks[taskCount] = new Event(parts[0].trim(), timeParts[0].trim(), timeParts[1].trim());
                     taskCount++;
+                    writeTasksToFile(tasks, taskCount);
                     System.out.println("-*-*-*-*-");
                     System.out.println("Oughkay. I've added this task:");
                     System.out.println(tasks[taskCount - 1]);
@@ -166,6 +177,7 @@ public class YoChan {
                             tasks[i] = tasks[i + 1];
                         }
                         taskCount--;
+                        writeTasksToFile(tasks, taskCount);
                         System.out.println("-*-*-*-*-");
                         System.out.println("Ough! I've removed this task:");
                         System.out.println(deletedTask);
@@ -191,5 +203,22 @@ public class YoChan {
         }
 
         scanner.close();
+    }
+
+    private static void writeTasksToFile(Task[] tasks, int taskCount) {
+        File dir = new File("data");
+        dir.mkdirs();
+        Path filePath = Paths.get("data", "YoChan.txt");
+
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < taskCount; i++) {
+            str.append((i + 1) + ". " + tasks[i] + System.lineSeparator());
+
+        }
+        try {
+            Files.writeString(filePath, str, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Ough.. what de hel!");
+        }
     }
 }
