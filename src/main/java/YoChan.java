@@ -4,6 +4,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class YoChan {
@@ -239,35 +242,54 @@ public class YoChan {
                 // Remove the task number
                 String taskData = line.substring(line.indexOf(". ") + 2);
                 
-                if (taskData.startsWith("[T]")) {
-                    // Parse Todo
-                    String description = taskData.substring(6);
-                    tasks[taskCount] = new Todo(description);
-                } else if (taskData.startsWith("[D]")) {
-                    // Parse Deadline
-                    String[] parts = taskData.substring(6).split(" \\(by: ");
-                    String description = parts[0];
-                    String by = parts[1].substring(0, parts[1].length() - 1);
-                    tasks[taskCount] = new Deadline(description, by);
-                } else if (taskData.startsWith("[E]")) {
-                    // Parse Event
-                    String[] parts = taskData.substring(6).split(" \\(from: ");
-                    String description = parts[0];
-                    String[] timeParts = parts[1].split(" to: ");
-                    String from = timeParts[0];
-                    String to = timeParts[1].substring(0, timeParts[1].length() - 1);
-                    tasks[taskCount] = new Event(description, from, to);
-                }
+                try {
+                    if (taskData.startsWith("[T]")) {
+                        // Parse Todo
+                        String description = taskData.substring(6);
+                        tasks[taskCount] = new Todo(description);
+                    } else if (taskData.startsWith("[D]")) {
+                        // Parse Deadline
+                        String[] parts = taskData.substring(6).split(" \\(by: ");
+                        String description = parts[0];
+                        String by = parts[1].substring(0, parts[1].length() - 1);
+                        tasks[taskCount] = new Deadline(description, convertSavedDateToInputFormat(by));
+                    } else if (taskData.startsWith("[E]")) {
+                        // Parse Event
+                        String[] parts = taskData.substring(6).split(" \\(from: ");
+                        String description = parts[0];
+                        String[] timeParts = parts[1].split(" to: ");
+                        String from = timeParts[0];
+                        String to = timeParts[1].substring(0, timeParts[1].length() - 1);
+                        tasks[taskCount] = new Event(description, convertSavedDateToInputFormat(from), 
+                                convertSavedDateToInputFormat(to));
+                    }
 
-                // Check if task was marked as done
-                if (taskData.contains("[X]")) {
-                    tasks[taskCount].mark();
+                    // Check if task was marked as done
+                    if (taskData.contains("[X]")) {
+                        tasks[taskCount].mark();
+                    }
+                    
+                    taskCount++;
+                } catch (YoChanException e) {
+                    System.out.println("Ough! Failed to load task: " + taskData);
                 }
-                
-                taskCount++;
             }
         } catch (IOException e) {
             System.out.println("Ough... Failed to load tasks!");
+        }
+    }
+
+    private static String convertSavedDateToInputFormat(String savedDate) {
+        // Convert from "MMM dd yyyy HHmm" to "yyyy-MM-dd HHmm"
+        try {
+            // First parse the saved date format
+            DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(savedDate, savedFormat);
+            
+            // Then format to the new input format
+            return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        } catch (DateTimeParseException e) {
+            return savedDate; // Return original if parsing fails
         }
     }
 }
