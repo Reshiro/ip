@@ -56,7 +56,7 @@ public class Ui {
     }
 
     /**
-     * Displays the task that was marked.
+     * Prints the String representation of the task that was marked.
      *
      * @param task The task that was marked.
      */
@@ -68,7 +68,7 @@ public class Ui {
     }
 
     /**
-     * Displays the task that was unmarked.
+     * Prints the String representation of the task that was unmarked.
      *
      * @param task The task that was unmarked.
      */
@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Displays the added task.
+     * Prints the String representation of the added task.
      *
      * @param task The added task.
      * @param totalTasks The number of tasks in the TaskList.
@@ -94,7 +94,7 @@ public class Ui {
     }
 
     /**
-     * Displays the deleted task.
+     * Prints the String representation of the deleted task.
      *
      * @param task The deleted task.
      * @param totalTasks The number of tasks in the TaskList.
@@ -108,7 +108,7 @@ public class Ui {
     }
 
     /**
-     * Displays all tasks in the TaskList.
+     * Prints all tasks in the TaskList.
      */
     public void showTaskList(TaskList tasks) {
         showBorder();
