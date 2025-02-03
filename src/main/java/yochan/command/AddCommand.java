@@ -27,4 +27,9 @@ public class AddCommand extends Command {
         ui.showTaskAdded(task, tasks.size());
         storage.saveTasks(tasks);
     }
+
+    @Override
+    public String toString() {
+        return this.task.toString();
+    }
 }
