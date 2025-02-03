@@ -3,7 +3,7 @@ package yochan;
 /**
  * Represents an exception caused by the YoChan program.
  *
- * @author Michale Cheong (Reshiro)
+ * @author Michael Cheong (Reshiro)
  */
 public class YoChanException extends Exception {
     /**

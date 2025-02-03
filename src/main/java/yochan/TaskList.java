@@ -21,21 +21,21 @@ public class TaskList {
     }
 
     /**
-     * Adds a YoChan to the list of tasks.
+     * Adds a task to the list of tasks.
      */
     public void add(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Returns the YoChan at the specified index.
+     * Returns the task at the specified index.
      */
     public Task get(int index) {
         return tasks.get(index);
     }
 
     /**
-     * Removes the YoChan at the specified index.
+     * Removes the task at the specified index.
      */
     public Task remove(int index) {
         return tasks.remove(index);
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the indicated YoChan as complete.
+     * Marks the indicated task as complete.
      *
      * @throws YoChanException If the index is invalid.
      */
@@ -62,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the indicated YoChan as incomplete.
+     * Marks the indicated task as incomplete.
      *
      * @throws YoChanException If the index is invalid.
      */
