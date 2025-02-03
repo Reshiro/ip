@@ -14,7 +14,7 @@ import yochan.YoChanException;
 public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
-    private LocalDateTime by;
+    private final LocalDateTime by;
 
 
     /**
