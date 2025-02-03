@@ -1,5 +1,7 @@
 /**
  * Represents the deletion of a Task from the list of tasks.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class DeleteCommand extends Command {
     private final int taskNumber;

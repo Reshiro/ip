@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 /**
  * Deals with user interaction.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class Ui {
     private final Scanner scanner;

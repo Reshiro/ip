@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents an event with a start and end time.
+ *
  * @author Michael Cheong (Reshiro)
  */
 public class Event extends Task {
@@ -16,10 +17,8 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the specified description, start time, and end time.
-     * @param description
-     * @param from
-     * @param to
-     * @throws YoChanException
+     *
+     * @throws YoChanException If the input is invalid.
      */
     public Event(String description, String from, String to) throws YoChanException {
         super(description);

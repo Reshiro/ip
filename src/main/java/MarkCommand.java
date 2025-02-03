@@ -1,5 +1,7 @@
 /**
  * Represents marking a Task as complete.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class MarkCommand extends Command {
     private final int taskNumber;

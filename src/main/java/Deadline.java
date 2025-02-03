@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Task with a deadline.
+ *
  * @author Michael Cheong (Reshiro)
  */
 public class Deadline extends Task {
@@ -14,9 +15,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline Task with the specified description and deadline.
-     * @param description
-     * @param by
-     * @throws YoChanException
+     *
+     * @throws YoChanException If the input is invalid.
      */
     public Deadline(String description, String by) throws YoChanException {
         super(description);

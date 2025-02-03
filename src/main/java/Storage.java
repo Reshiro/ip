@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Deals with saving and loading the list of tasks to the disk.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class Storage {
     private final Path filePath;

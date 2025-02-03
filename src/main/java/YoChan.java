@@ -1,6 +1,7 @@
 
 /**
  * Represents the YoChan chatbot.
+ *
  * @author Michael Cheong (Reshiro)
  */
 public class YoChan {

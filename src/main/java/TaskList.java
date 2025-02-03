@@ -3,6 +3,8 @@ import java.util.List;
 
 /**
  * Represents a list of tasks.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class TaskList {
     private final List<Task> tasks;

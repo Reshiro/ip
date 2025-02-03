@@ -1,5 +1,7 @@
 /**
  * Represents the command for adding a Task to the list of tasks.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class AddCommand extends Command {
     private final Task task;

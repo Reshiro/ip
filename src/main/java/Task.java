@@ -1,5 +1,6 @@
 /**
  * Represents a Task.
+ *
  * @author Michael Cheong (Reshiro)
  */
 public class Task {
@@ -8,7 +9,6 @@ public class Task {
 
     /**
      * Creates a Task with the specified description.
-     * @param description
      */
     public Task(String description) {
         this.description = description;

@@ -1,5 +1,7 @@
 /**
  * Represents the end of the program.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class ExitCommand extends Command {
     /**

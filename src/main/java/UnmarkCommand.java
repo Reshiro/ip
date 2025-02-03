@@ -1,5 +1,7 @@
 /**
  * Represents marking a Task as incomplete.
+ *
+ * @author Michael Cheong (Reshiro)
  */
 public class UnmarkCommand extends Command {
     private final int taskNumber;
