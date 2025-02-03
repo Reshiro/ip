@@ -1,5 +1,9 @@
+package yochan;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import yochan.task.Task;
 
 /**
  * Represents a list of tasks.
@@ -17,21 +21,21 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the list of tasks.
+     * Adds a YoChan.Task to the list of tasks.
      */
     public void add(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Returns the Task at the specified index.
+     * Returns the YoChan.Task at the specified index.
      */
     public Task get(int index) {
         return tasks.get(index);
     }
 
     /**
-     * Removes the Task at the specified index.
+     * Removes the YoChan.Task at the specified index.
      */
     public Task remove(int index) {
         return tasks.remove(index);
@@ -45,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the indicated Task as complete.
+     * Marks the indicated YoChan.Task as complete.
      *
      * @throws YoChanException If the index is invalid.
      */
@@ -58,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the indicated Task as incomplete.
+     * Marks the indicated YoChan.Task as incomplete.
      *
      * @throws YoChanException If the index is invalid.
      */

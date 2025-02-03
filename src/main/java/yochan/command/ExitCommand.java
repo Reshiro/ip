@@ -1,3 +1,9 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+
 /**
  * Represents the end of the program.
  *
@@ -5,7 +11,7 @@
  */
 public class ExitCommand extends Command {
     /**
-     * Creates an ExitCommand object that indicates the program is to end.
+     * Creates an YoChan.ExitCommand object that indicates the program is to end.
      */
     public ExitCommand() {
         super();

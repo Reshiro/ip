@@ -1,5 +1,12 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+import yochan.YoChanException;
+
 /**
- * Represents marking a Task as complete.
+ * Represents marking a YoChan.Task as complete.
  *
  * @author Michael Cheong (Reshiro)
  */
@@ -7,7 +14,7 @@ public class MarkCommand extends Command {
     private final int taskNumber;
 
     /**
-     * Creates a MarkCommand object with the index of the Task to be marked.
+     * Creates a YoChan.MarkCommand object with the index of the YoChan.Task to be marked.
      */
     public MarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;

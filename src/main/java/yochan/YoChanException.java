@@ -1,5 +1,7 @@
+package yochan;
+
 /**
- * Represents an exception caused by the YoChan program.
+ * Represents an exception caused by the YoChan.YoChan program.
  *
  * @author Michale Cheong (Reshiro)
  */
