@@ -1,5 +1,11 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+
 /**
- * Represents the command for listing tasks in the TaskList.
+ * Represents the command for listing tasks in the YoChan.TaskList.
  *
  * @author Michael Cheong (Reshiro)
  */

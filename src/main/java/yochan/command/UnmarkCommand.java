@@ -1,5 +1,12 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+import yochan.YoChanException;
+
 /**
- * Represents marking a Task as incomplete.
+ * Represents marking a YoChan.Task as incomplete.
  *
  * @author Michael Cheong (Reshiro)
  */
@@ -7,7 +14,7 @@ public class UnmarkCommand extends Command {
     private final int taskNumber;
 
     /**
-     * Creates an UnmarkCommand object with the index of the task to be marked as incomplete.
+     * Creates an YoChan.UnmarkCommand object with the index of the task to be marked as incomplete.
      */
     public UnmarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;

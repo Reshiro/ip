@@ -1,3 +1,10 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+import yochan.YoChanException;
+
 /**
  * Represents a command given by the user.
  *
@@ -5,7 +12,7 @@
  */
 public abstract class Command {
     /**
-     * Indicates if the Command is an Exit command.
+     * Indicates if the YoChan.Command is an Exit command.
      */
     protected boolean isExit;
 
@@ -15,14 +22,14 @@ public abstract class Command {
 
     /**
      * Executes the command.
-     * @param tasks The list of tasks that the Command may operate on.
+     * @param tasks The list of tasks that the YoChan.Command may operate on.
      *
-     * @throws YoChanException If any issue occurs during the execution of the Command.
+     * @throws YoChanException If any issue occurs during the execution of the YoChan.Command.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws YoChanException;
 
     /**
-     * Indicates if the Command is an Exit command.
+     * Indicates if the YoChan.Command is an Exit command.
      */
     public boolean isExit() {
         return isExit;

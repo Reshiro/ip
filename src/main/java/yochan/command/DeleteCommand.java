@@ -1,5 +1,13 @@
+package yochan.command;
+
+import yochan.Storage;
+import yochan.TaskList;
+import yochan.Ui;
+import yochan.YoChanException;
+import yochan.task.Task;
+
 /**
- * Represents the deletion of a Task from the list of tasks.
+ * Represents the deletion of a YoChan.Task from the list of tasks.
  *
  * @author Michael Cheong (Reshiro)
  */
@@ -7,7 +15,7 @@ public class DeleteCommand extends Command {
     private final int taskNumber;
 
     /**
-     * Creates a DeleteCommand object with the specified index of the Task to be deleted.
+     * Creates a YoChan.DeleteCommand object with the specified index of the YoChan.Task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;

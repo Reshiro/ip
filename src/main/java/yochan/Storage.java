@@ -1,3 +1,5 @@
+package yochan;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,6 +10,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import yochan.task.Deadline;
+import yochan.task.Event;
+import yochan.task.Task;
+import yochan.task.Todo;
+
 /**
  * Deals with saving and loading the list of tasks to the disk.
  *
@@ -17,7 +24,7 @@ public class Storage {
     private final Path filePath;
 
     /**
-     * Creates a Storage object with the specified location for the tasks to be saved at.
+     * Creates a YoChan.Storage object with the specified location for the tasks to be saved at.
      */
     public Storage(String directory, String filename) {
         File dir = new File(directory);
