@@ -19,7 +19,7 @@ public class Event extends Task {
 
 
     /**
-     * Creates a new YoChan.Event with the specified description, start time, and end time.
+     * Creates a new Event with the specified description, start time, and end time.
      *
      * @throws YoChanException If the input is invalid.
      */
@@ -29,7 +29,7 @@ public class Event extends Task {
             this.from = LocalDateTime.parse(from, INPUT_FORMAT);
             this.to = LocalDateTime.parse(to, INPUT_FORMAT);
             if (this.to.isBefore(this.from)) {
-                throw new YoChanException("Ough! YoChan.Event end time cannot be before start time!");
+                throw new YoChanException("Ough! Event end time cannot be before start time!");
             }
         } catch (DateTimeParseException e) {
             throw new YoChanException("Ough! Please use the format: YYYY-MM-DD HHMM (e.g., 2024-03-25 1430)");

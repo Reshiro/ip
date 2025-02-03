@@ -24,7 +24,7 @@ public class Storage {
     private final Path filePath;
 
     /**
-     * Creates a YoChan.Storage object with the specified location for the tasks to be saved at.
+     * Creates a YoChan object with the specified location for the tasks to be saved at.
      */
     public Storage(String directory, String filename) {
         File dir = new File(directory);

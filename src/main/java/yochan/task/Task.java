@@ -1,7 +1,7 @@
 package yochan.task;
 
 /**
- * Represents a YoChan.Task.
+ * Represents a Task.
  *
  * @author Michael Cheong (Reshiro)
  */
@@ -10,7 +10,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Creates a YoChan.Task with the specified description.
+     * Creates a Task with the specified description.
      */
     public Task(String description) {
         this.description = description;
@@ -18,14 +18,14 @@ public class Task {
     }
 
     /**
-     * Marks the YoChan.Task as complete.
+     * Marks the Task as complete.
      */
     public void mark() {
         isDone = true;
     }
 
     /**
-     * Marks the YoChan.Task as incomplete.
+     * Marks the Task as incomplete.
      */
     public void unmark() {
         isDone = false;

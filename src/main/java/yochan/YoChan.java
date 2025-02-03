@@ -3,7 +3,7 @@ package yochan;
 import yochan.command.Command;
 
 /**
- * Represents the YoChan.YoChan chatbot.
+ * Represents the YoChan chatbot.
  *
  * @author Michael Cheong (Reshiro)
  */
@@ -48,6 +48,6 @@ public class YoChan {
     }
 
     public static void main(String[] args) {
-        new YoChan("data", "YoChan.YoChan.txt").run();
+        new YoChan("data", "YoChan.txt").run();
     }
 }

@@ -13,7 +13,7 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * Creates an YoChan.Ui object with the system input.
+     * Creates an Ui object with the system input.
      */
     public Ui() {
         scanner = new Scanner(System.in);
@@ -83,7 +83,7 @@ public class Ui {
      * Displays the added task.
      *
      * @param task The added task.
-     * @param totalTasks The number of tasks in the YoChan.TaskList.
+     * @param totalTasks The number of tasks in the TaskList.
      */
     public void showTaskAdded(Task task, int totalTasks) {
         showBorder();
@@ -97,7 +97,7 @@ public class Ui {
      * Displays the deleted task.
      *
      * @param task The deleted task.
-     * @param totalTasks The number of tasks in the YoChan.TaskList.
+     * @param totalTasks The number of tasks in the TaskList.
      */
     public void showTaskDeleted(Task task, int totalTasks) {
         showBorder();
@@ -108,7 +108,7 @@ public class Ui {
     }
 
     /**
-     * Displays all tasks in the YoChan.TaskList.
+     * Displays all tasks in the TaskList.
      */
     public void showTaskList(TaskList tasks) {
         showBorder();

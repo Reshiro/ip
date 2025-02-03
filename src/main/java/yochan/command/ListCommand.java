@@ -5,7 +5,7 @@ import yochan.TaskList;
 import yochan.Ui;
 
 /**
- * Represents the command for listing tasks in the YoChan.TaskList.
+ * Represents the command for listing tasks in the TaskList.
  *
  * @author Michael Cheong (Reshiro)
  */

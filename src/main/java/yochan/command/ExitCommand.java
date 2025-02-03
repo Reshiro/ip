@@ -11,7 +11,7 @@ import yochan.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Creates an YoChan.ExitCommand object that indicates the program is to end.
+     * Creates an ExitCommand object that indicates the program is to end.
      */
     public ExitCommand() {
         super();

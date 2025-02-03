@@ -1,13 +1,13 @@
 package yochan.task;
 
 /**
- * Represents a YoChan.Task with no deadline.
+ * Represents a Task with no deadline.
  *
  * @author Michael Cheong (Reshiro)
  */
 public class Todo extends Task {
     /**
-     * Creates a YoChan.Todo YoChan.Task with the specified description.
+     * Creates a Todo Task with the specified description.
      */
     public Todo(String description) {
         super(description);
