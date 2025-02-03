@@ -4,6 +4,7 @@ import yochan.command.AddCommand;
 import yochan.command.Command;
 import yochan.command.DeleteCommand;
 import yochan.command.ExitCommand;
+import yochan.command.FindCommand;
 import yochan.command.ListCommand;
 import yochan.command.MarkCommand;
 import yochan.command.UnmarkCommand;
@@ -55,6 +56,12 @@ public class Parser {
             return parseEvent(userInput);
         } else if (userInput.startsWith("delete")) {
             return parseDelete(userInput);
+        } else if (userInput.startsWith("find")) {
+            if (userInput.equals("find") || userInput.substring(5).trim().isEmpty()) {
+                throw new YoChanException("Ough! The search keyword cannot be empty!");
+            }
+            // Uses everything after the find statement as a search term.
+            return new FindCommand(userInput.substring(5).trim());
         } else {
             throw new YoChanException("Ough!! Unknown command!");
         }

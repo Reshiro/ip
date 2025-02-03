@@ -118,6 +118,25 @@ public class Ui {
         showBorder();
     }
 
+    /**
+     * Displays tasks matching the search keyword.
+     *
+     * @param tasks The matching tasks.
+     */
+    public void showMatchingTasks(TaskList tasks) {
+        showBorder();
+        if (tasks.size() == 0) {
+            System.out.println("Ough... No matching tasks found!");
+        } else {
+            System.out.println("Ough! Here are the matching tasks in your list:");
+            // Prints matching tasks as consecutive indices; might switch to task list indices later.
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
+        showBorder();
+    }
+
     private void showBorder() {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-");
     }
