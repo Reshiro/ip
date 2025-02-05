@@ -57,12 +57,7 @@ public class Parser {
         } else if (userInput.startsWith("delete")) {
             return parseDelete(userInput);
         } else if (userInput.startsWith("find")) {
-            // Currently a different format from the other commands, will change later.
-            if (userInput.equals("find") || userInput.substring(5).trim().isEmpty()) {
-                throw new YoChanException("Ough! The search keyword cannot be empty!");
-            }
-            // Uses everything after the find statement as a search term.
-            return new FindCommand(userInput.substring(5).trim());
+            return parseFind(userInput);
         } else {
             throw new YoChanException("Ough!! Unknown command!");
         }
@@ -122,5 +117,14 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new YoChanException("Ough! Please provide a valid task number after 'delete'!");
         }
+    }
+
+    private static Command parseFind(String userInput) throws YoChanException {
+        // Currently a different format from the other commands, will change later.
+        if (userInput.equals("find") || userInput.substring(5).trim().isEmpty()) {
+            throw new YoChanException("Ough! The search keyword cannot be empty!");
+        }
+        // Uses everything after the find statement as a search term.
+        return new FindCommand(userInput.substring(5).trim());
     }
 }
