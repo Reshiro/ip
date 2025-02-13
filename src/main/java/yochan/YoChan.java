@@ -50,4 +50,17 @@ public class YoChan {
     public static void main(String[] args) {
         new YoChan("data", "YoChan.txt").run();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.getString(tasks, ui, storage);
+        } catch (YoChanException e) {
+            System.out.println("Ough oh...");
+            return e.getMessage();
+        }
+    }
 }

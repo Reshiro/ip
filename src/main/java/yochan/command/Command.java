@@ -1,5 +1,8 @@
 package yochan.command;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import yochan.Storage;
 import yochan.TaskList;
 import yochan.Ui;
@@ -34,5 +37,18 @@ public abstract class Command {
      */
     public boolean isExit() {
         return isExit;
+    }
+
+    public String getString(TaskList tasks, Ui ui, Storage storage) throws YoChanException {
+        // @@author Ernest Friedman-Hill-reused
+        // Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        execute(tasks, ui, storage);
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
     }
 }
