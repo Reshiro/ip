@@ -141,6 +141,10 @@ public class Ui {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-");
     }
 
+    private String getBorder() {
+        return "-*-*-*-*-*-*-*-*-*-*-";
+    }
+
     /**
      * Closes the scanner after usage.
      */

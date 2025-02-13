@@ -55,6 +55,12 @@ public class YoChan {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "YoChan heard: " + input;
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.getString(tasks, ui, storage);
+        } catch (YoChanException e) {
+            System.out.println("Ough oh...");
+            return e.getMessage();
+        }
     }
 }
