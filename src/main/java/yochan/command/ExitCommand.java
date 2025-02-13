@@ -1,5 +1,6 @@
 package yochan.command;
 
+import javafx.application.Platform;
 import yochan.Storage;
 import yochan.TaskList;
 import yochan.Ui;
@@ -21,5 +22,6 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
+        Platform.exit();
     }
 }
