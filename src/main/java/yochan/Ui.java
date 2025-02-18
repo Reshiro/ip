@@ -129,7 +129,7 @@ public class Ui {
             System.out.println("Ough... No matching tasks found!");
         } else {
             System.out.println("Ough! Here are the matching tasks in your list:");
-            // Prints matching tasks as consecutive indices; might switch to task list indices later.
+            // Prints matching tasks as consecutive indices.
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + ". " + tasks.get(i));
             }
@@ -139,10 +139,6 @@ public class Ui {
 
     private void showBorder() {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-");
-    }
-
-    private String getBorder() {
-        return "-*-*-*-*-*-*-*-*-*-*-";
     }
 
     /**
