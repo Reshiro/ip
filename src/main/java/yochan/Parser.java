@@ -7,6 +7,7 @@ import yochan.command.ExitCommand;
 import yochan.command.FindCommand;
 import yochan.command.ListCommand;
 import yochan.command.MarkCommand;
+import yochan.command.PriorityCommand;
 import yochan.command.UnmarkCommand;
 import yochan.task.Deadline;
 import yochan.task.Event;
@@ -55,6 +56,8 @@ public class Parser {
             return parseDelete(userInput);
         } else if (userInput.startsWith("find")) {
             return parseFind(userInput);
+        } else if (userInput.startsWith("priority")) {
+            return parsePriorityCommand(userInput);
         } else {
             throw new YoChanException("Ough!! Unknown command!");
         }
@@ -149,4 +152,23 @@ public class Parser {
         // Uses everything after the find statement as a search term.
         return new FindCommand(userInput.substring(5).trim());
     }
+
+    private static Command parsePriorityCommand(String userInput) throws YoChanException {
+        if (userInput.equals("priority")) {
+            throw new YoChanException("Ough! Please specify which task to set a priority for!");
+        }
+        try {
+            String[] tokens = userInput.split(" ");
+            if (tokens.length < 3) {
+                throw new YoChanException("Ough! The format should be: priority <taskNumber> <priorityLevel>!");
+            }
+            int taskNumber = Integer.parseInt(tokens[1]);
+            int priorityLevel = Integer.parseInt(tokens[2]);
+            return new PriorityCommand(taskNumber, priorityLevel);
+        } catch (NumberFormatException e) {
+            throw new YoChanException(
+                    "Ough! Please provide a valid task number and priority level after 'priority'! >:(");
+        }
+    }
+
 }

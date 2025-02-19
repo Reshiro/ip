@@ -33,6 +33,11 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setYoChan(YoChan d) {
         yoChan = d;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(getWelcomeMessage(), yoChanImage));
+    }
+
+    public String getWelcomeMessage() {
+        return "Ough... What do you want?";
     }
 
     /**

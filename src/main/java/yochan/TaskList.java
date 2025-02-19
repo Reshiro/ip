@@ -74,6 +74,14 @@ public class TaskList {
         }
     }
 
+    public void setTaskPriority(int index, int priority) throws YoChanException {
+        if (isValidIndex(index)) {
+            tasks.get(index).setPriority(priority);
+        } else {
+            throw new YoChanException("Invalid task number! >:(");
+        }
+    }
+
     private boolean isValidIndex(int index) {
         return index >= 0 && index < tasks.size();
     }
