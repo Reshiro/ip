@@ -24,32 +24,29 @@ public class Parser {
      * @throws YoChanException If input is invalid.
      */
     public static Command parseCommand(String userInput) throws YoChanException {
+        Command directCommand = getDirectCommand(userInput);
+        if (directCommand != null) {
+            return directCommand;
+        }
+        return parseOtherCommands(userInput);
+    }
+
+    private static Command getDirectCommand(String userInput) {
         if (userInput.equals("bye")) {
             return new ExitCommand();
         } else if (userInput.equals("list")) {
             return new ListCommand();
-        } else if (userInput.startsWith("mark")) {
-            try {
-                // Uses the parameter immediately after the mark command as the index to be marked.
-                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                return new MarkCommand(taskNumber);
-            } catch (Exception e) {
-                throw new YoChanException("Specify a valid task number after 'mark'! >:(");
-            }
+        }
+        return null; // No direct command found
+    }
+
+    private static Command parseOtherCommands(String userInput) throws YoChanException {
+        if (userInput.startsWith("mark")) {
+            return parseMarkCommand(userInput);
         } else if (userInput.startsWith("unmark")) {
-            try {
-                // Uses the parameter immediately after the unmark command as the index to be unmarked.
-                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                return new UnmarkCommand(taskNumber);
-            } catch (Exception e) {
-                throw new YoChanException("Specify a valid task number after 'unmark'! >:(");
-            }
+            return parseUnmarkCommand(userInput);
         } else if (userInput.startsWith("todo")) {
-            // Parse and return the todo command.
-            if (userInput.equals("todo") || userInput.substring(5).trim().isEmpty()) {
-                throw new YoChanException("Ough! The description of a todo cannot be empty!");
-            }
-            return new AddCommand(new Todo(userInput.substring(5).trim()));
+            return parseTodoCommand(userInput);
         } else if (userInput.startsWith("deadline")) {
             return parseDeadline(userInput);
         } else if (userInput.startsWith("event")) {
@@ -61,6 +58,31 @@ public class Parser {
         } else {
             throw new YoChanException("Ough!! Unknown command!");
         }
+    }
+
+    private static Command parseMarkCommand(String userInput) throws YoChanException {
+        try {
+            int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+            return new MarkCommand(taskNumber);
+        } catch (Exception e) {
+            throw new YoChanException("Specify a valid task number after 'mark'! >:(");
+        }
+    }
+
+    private static Command parseUnmarkCommand(String userInput) throws YoChanException {
+        try {
+            int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+            return new UnmarkCommand(taskNumber);
+        } catch (Exception e) {
+            throw new YoChanException("Specify a valid task number after 'unmark'! >:(");
+        }
+    }
+
+    private static Command parseTodoCommand(String userInput) throws YoChanException {
+        if (userInput.equals("todo") || userInput.substring(5).trim().isEmpty()) {
+            throw new YoChanException("Ough! The description of a todo cannot be empty!");
+        }
+        return new AddCommand(new Todo(userInput.substring(5).trim()));
     }
 
     private static Command parseDeadline(String userInput) throws YoChanException {

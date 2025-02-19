@@ -21,12 +21,11 @@ public class YoChan {
     public YoChan(String dataDir, String filename) {
         ui = new Ui();
         storage = new Storage(dataDir, filename);
-        TaskList loadedTasks;
+        TaskList loadedTasks = new TaskList();
         try {
             loadedTasks = storage.loadTasks();
         } catch (YoChanException e) {
             ui.showError(e.getMessage());
-            loadedTasks = new TaskList();
         }
         tasks = loadedTasks;
     }
@@ -58,7 +57,7 @@ public class YoChan {
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            String response = c.getString(tasks, ui, storage);
+            String response = c.executeAndGetResult(tasks, ui, storage);
             assert response != null : "Chatbot should never return a null response";
             return response;
         } catch (YoChanException e) {

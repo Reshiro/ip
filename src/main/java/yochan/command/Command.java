@@ -39,7 +39,13 @@ public abstract class Command {
         return isExit;
     }
 
-    public String getString(TaskList tasks, Ui ui, Storage storage) throws YoChanException {
+    /**
+     * Execute this command and returns the response.
+     *
+     * @return The response from the chatbot as a String.
+     * @throws YoChanException If execution of the command fails.
+     */
+    public String executeAndGetResult(TaskList tasks, Ui ui, Storage storage) throws YoChanException {
         // @@author Ernest Friedman-Hill-reused
         // Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
