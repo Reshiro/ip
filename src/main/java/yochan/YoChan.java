@@ -34,6 +34,7 @@ public class YoChan {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
+            assert !isExit : "isExit should never be true at this point";
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parseCommand(fullCommand);
@@ -56,7 +57,9 @@ public class YoChan {
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            return c.executeAndGetResult(tasks, ui, storage);
+            String response = c.executeAndGetResult(tasks, ui, storage);
+            assert response != null : "Chatbot should never return a null response";
+            return response;
         } catch (YoChanException e) {
             System.out.println("Ough oh...");
             return e.getMessage();
