@@ -21,12 +21,11 @@ public class YoChan {
     public YoChan(String dataDir, String filename) {
         ui = new Ui();
         storage = new Storage(dataDir, filename);
-        TaskList loadedTasks;
+        TaskList loadedTasks = new TaskList();
         try {
             loadedTasks = storage.loadTasks();
         } catch (YoChanException e) {
             ui.showError(e.getMessage());
-            loadedTasks = new TaskList();
         }
         tasks = loadedTasks;
     }
@@ -57,7 +56,7 @@ public class YoChan {
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            return c.getString(tasks, ui, storage);
+            return c.executeAndGetResult(tasks, ui, storage);
         } catch (YoChanException e) {
             System.out.println("Ough oh...");
             return e.getMessage();
