@@ -137,6 +137,12 @@ public class Ui {
         showBorder();
     }
 
+    public void showTaskModifiedPriority(Task task) {
+        showBorder();
+        System.out.println("Oughkay! I've updated the priority of this task to " + task.getPriority());
+        showBorder();
+    }
+
     private void showBorder() {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-");
     }
