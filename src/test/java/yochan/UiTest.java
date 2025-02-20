@@ -1,15 +1,17 @@
 package yochan;
 
-import org.junit.jupiter.api.Test;
-import yochan.task.Deadline;
-import yochan.task.Event;
-import yochan.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import yochan.task.Deadline;
+import yochan.task.Event;
+import yochan.task.Todo;
+
 
 /**
  * Tests the Ui class.
@@ -36,11 +38,12 @@ public class UiTest {
 
         System.setOut(originalOut);
 
-        assertEquals(outputStream.toString().trim(),
-                ("-*-*-*-*-*-*-*-*-*-*-\n" +
-                        "1. [T][ ] test1\n2. [D][ ] test2 (by: Dec 12 1200 1200)\n3. [E][ ] test3 " +
-                        "(from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n" +
-                        "-*-*-*-*-*-*-*-*-*-*-").trim());
+        assertEquals(outputStream.toString().trim(), ("-*-*-*-*-*-*-*-*-*-*-\n"
+                + "1. [T][ ] test1 (Priority: 0)\n"
+                + "2. [D][ ] test2 (Priority: 0) (by: Dec 12 1200 1200)\n"
+                + "3. [E][ ] test3 (Priority: 0) "
+                + "(from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n"
+                + "-*-*-*-*-*-*-*-*-*-*-").trim());
 
         try {
             taskList.markTask(2);
@@ -73,11 +76,11 @@ public class UiTest {
         ui.showTaskList(taskList);
         System.setOut(originalOut);
 
-        assertEquals(outputStream.toString().trim(),
-                ("-*-*-*-*-*-*-*-*-*-*-\n" +
-                        "1. [T][ ] test1\n2. [D][ ] test2 (by: Dec 12 1200 1200)\n3. [E][X] test3 " +
-                        "(from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n" +
-                        "-*-*-*-*-*-*-*-*-*-*-").trim());
+        assertEquals(outputStream.toString().trim(), ("-*-*-*-*-*-*-*-*-*-*-\n"
+                + "1. [T][ ] test1 (Priority: 0)\n"
+                + "2. [D][ ] test2 (Priority: 0) (by: Dec 12 1200 1200)\n"
+                + "3. [E][X] test3 (Priority: 0) (from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n"
+                + "-*-*-*-*-*-*-*-*-*-*-").trim());
     }
 
     @Test
@@ -104,10 +107,9 @@ public class UiTest {
         ui.showTaskList(taskList);
         System.setOut(originalOut);
 
-        assertEquals(outputStream.toString().trim(),
-                ("-*-*-*-*-*-*-*-*-*-*-\n" +
-                        "1. [T][ ] test1\n2. [E][ ] test3 " +
-                        "(from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n" +
-                        "-*-*-*-*-*-*-*-*-*-*-").trim());
+        assertEquals(outputStream.toString().trim(), ("-*-*-*-*-*-*-*-*-*-*-\n"
+                + "1. [T][ ] test1 (Priority: 0)\n"
+                + "2. [E][ ] test3 (Priority: 0) (from: Oct 10 1000 1000 to: Oct 10 1000 1001)\n"
+                + "-*-*-*-*-*-*-*-*-*-*-").trim());
     }
 }

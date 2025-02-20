@@ -1,12 +1,14 @@
 package yochan;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import yochan.command.AddCommand;
 import yochan.task.Event;
 import yochan.task.Todo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests the Parser class.
@@ -64,8 +66,8 @@ public class ParserTest {
             Parser.parseCommand("deadline /by 2000-10-40 2500");
             fail(); // The test should not reach this line.
         } catch (Exception e) {
-            assertEquals("" +
-                    "Ough! The format should be: deadline <description> /by <YYYY-MM-DD HHMM>",
+            assertEquals(""
+                    + "Ough! The format should be: deadline <description> /by <YYYY-MM-DD HHMM>",
                     e.getMessage());
         }
     }

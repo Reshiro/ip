@@ -1,12 +1,13 @@
 package yochan;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import yochan.task.Deadline;
 import yochan.task.Event;
 import yochan.task.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests the TaskList class.
