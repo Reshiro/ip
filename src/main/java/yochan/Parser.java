@@ -1,5 +1,11 @@
 package yochan;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import yochan.command.AddCommand;
 import yochan.command.Command;
 import yochan.command.DeleteCommand;
@@ -13,11 +19,6 @@ import yochan.task.Deadline;
 import yochan.task.Event;
 import yochan.task.Task;
 import yochan.task.Todo;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Deals with processing user inputs and saved tasks.
@@ -167,55 +168,27 @@ public class Parser {
     }
 
     /**
-     * Parses a saved task string (from file storage) into a Task object.
-     * This method extracts the task type, description, dates, priority, and completion status.
+     * Parses the task description of the saved task.
+     *
+     * @return The task represented by its description.
      */
     public static Task parseSavedTask(String taskData) {
+        taskData = taskData.trim();
         try {
-            taskData = taskData.trim();
+            int loadedPriority = extractPriority(taskData);
             Task task = null;
-            // Extract priority using regex
-            int loadedPriority = 0;
-            Pattern priorityPattern = Pattern.compile(" \\(Priority: (-?\\d+)\\)");
-            Matcher matcher = priorityPattern.matcher(taskData);
-            if (matcher.find()) {
-                loadedPriority = Integer.parseInt(matcher.group(1));
-            }
-
             if (taskData.startsWith("[T]")) {
-                String description = taskData.substring(6);
-                // Remove trailing ' (Priority: X)' if present
-                description = description.replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                task = new Todo(description);
+                task = parseTodoTask(taskData);
             } else if (taskData.startsWith("[D]")) {
-                String[] parts = taskData.substring(6).split(" \\(by: ");
-                if (parts.length < 2) {
-                    throw new YoChanException("Malformed deadline task data");
-                }
-                // Remove trailing ' (Priority: X)' from description if present
-                String description = parts[0].replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                String by = parts[1].substring(0, parts[1].length() - 1);
-                task = new Deadline(description, convertSavedDateToInputFormat(by));
+                task = parseDeadlineTask(taskData);
             } else if (taskData.startsWith("[E]")) {
-                String[] parts = taskData.substring(6).split(" \\(from: ");
-                if (parts.length < 2) {
-                    throw new YoChanException("Malformed event task data");
-                }
-                // Remove trailing ' (Priority: X)' from description if present
-                String description = parts[0].replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                String[] timeParts = parts[1].split(" to: ");
-                if (timeParts.length < 2) {
-                    throw new YoChanException("Malformed event time data");
-                }
-                String from = timeParts[0];
-                String to = timeParts[1].substring(0, timeParts[1].length() - 1);
-                task = new Event(description, convertSavedDateToInputFormat(from), convertSavedDateToInputFormat(to));
+                task = parseEventTask(taskData);
             }
             if (task != null) {
                 task.setPriority(loadedPriority);
-            }
-            if (task != null && taskData.contains("[X]")) {
-                task.mark();
+                if (isTaskCompleted(taskData)) {
+                    task.mark();
+                }
             }
             return task;
         } catch (YoChanException e) {
@@ -224,9 +197,53 @@ public class Parser {
         }
     }
 
-    /**
-     * Converts a saved date string (format "MMM d yyyy HHmm") into the input format ("yyyy-MM-dd HHmm").
-     */
+    private static int extractPriority(String taskData) {
+        Pattern priorityPattern = Pattern.compile(" \\(Priority: (-?\\d+)\\)");
+        Matcher matcher = priorityPattern.matcher(taskData);
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group(1));
+        }
+        return 0;
+    }
+
+    private static boolean isTaskCompleted(String taskData) {
+        return taskData.contains("[X]");
+    }
+
+    private static String removePrioritySuffix(String description) {
+        return description.replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
+    }
+
+    private static Task parseTodoTask(String taskData) throws YoChanException {
+        String description = removePrioritySuffix(taskData.substring(6));
+        return new Todo(description);
+    }
+
+    private static Task parseDeadlineTask(String taskData) throws YoChanException {
+        String[] parts = taskData.substring(6).split(" \\(by: ");
+        if (parts.length < 2) {
+            throw new YoChanException("Malformed deadline task data");
+        }
+        String description = removePrioritySuffix(parts[0]);
+        String by = parts[1].substring(0, parts[1].length() - 1);
+        return new Deadline(description, convertSavedDateToInputFormat(by));
+    }
+
+    private static Task parseEventTask(String taskData) throws YoChanException {
+        String[] parts = taskData.substring(6).split(" \\(from: ");
+        if (parts.length < 2) {
+            throw new YoChanException("Malformed event task data");
+        }
+        String description = removePrioritySuffix(parts[0]);
+        String[] timeParts = parts[1].split(" to: ");
+        if (timeParts.length < 2) {
+            throw new YoChanException("Malformed event time data");
+        }
+        String from = timeParts[0];
+        String to = timeParts[1].substring(0, timeParts[1].length() - 1);
+        return new Event(description, convertSavedDateToInputFormat(from), convertSavedDateToInputFormat(to));
+    }
+
     private static String convertSavedDateToInputFormat(String savedDate) {
         try {
             DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
@@ -237,4 +254,5 @@ public class Parser {
             return savedDate;
         }
     }
+
 }
