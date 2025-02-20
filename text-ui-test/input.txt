@@ -1,10 +1,10 @@
 todo Feed fishes
 list
-deadline Rub belly /by Monday
+deadline Rub belly /by 1000-10-10 1000
 list
 mark 1
 mark 2
 list
 unmark 1
 list
-event Aquarium meeting /from Mon 2pm /to 4pm
+event Aquarium meeting /from 1001-11-10 1100 /to 1001-11-19 1200
