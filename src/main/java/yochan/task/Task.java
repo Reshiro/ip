@@ -5,7 +5,7 @@ package yochan.task;
  *
  * @author Michael Cheong (Reshiro)
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
     private int priority;

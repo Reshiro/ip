@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the YoChan instance */
     public void setYoChan(YoChan d) {
         yoChan = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(getWelcomeMessage(), yoChanImage));

@@ -10,6 +10,7 @@ import yochan.task.Task;
  * @author Michael Cheong (Reshiro)
  */
 public class Ui {
+    private static final String BORDER = "-*-*-*-*-*-*-*-*-*-*-";
     private final Scanner scanner;
 
     /**
@@ -50,9 +51,9 @@ public class Ui {
      * @param message The error message.
      */
     public void showError(String message) {
-        showBorder();
-        System.out.println(message);
-        showBorder();
+        showBorderError();
+        System.err.println(message);
+        showBorderError();
     }
 
     /**
@@ -137,6 +138,11 @@ public class Ui {
         showBorder();
     }
 
+    /**
+     * Displays the new priority of the task.
+     *
+     * @param task The task whose priority was modified.
+     */
     public void showTaskModifiedPriority(Task task) {
         showBorder();
         System.out.println("Oughkay! I've updated the priority of this task to " + task.getPriority());
@@ -144,7 +150,11 @@ public class Ui {
     }
 
     private void showBorder() {
-        System.out.println("-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println(BORDER);
+    }
+
+    private void showBorderError() {
+        System.err.println(BORDER);
     }
 
     /**

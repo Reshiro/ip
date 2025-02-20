@@ -61,7 +61,7 @@ public class YoChan {
             assert response != null : "Chatbot should never return a null response";
             return response;
         } catch (YoChanException e) {
-            System.out.println("Ough oh...");
+            System.err.println("Ough oh...");
             return e.getMessage();
         }
     }

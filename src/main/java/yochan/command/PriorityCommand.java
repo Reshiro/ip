@@ -11,8 +11,8 @@ import yochan.YoChanException;
  * @author Michael Cheong (Reshiro)
  */
 public class PriorityCommand extends Command {
-    private int taskNumber;
-    private int priority;
+    private final int taskNumber;
+    private final int priority;
 
     /**
      * Creates a PriorityCommand object that indicates the program is to end.
