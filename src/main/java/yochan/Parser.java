@@ -166,18 +166,22 @@ public class Parser {
         }
     }
 
-    public static Task parseTaskFromSaved(String taskData) throws YoChanException {
+    /**
+     * Parses a saved task string (from file storage) into a Task object.
+     * This method extracts the task type, description, dates, priority, and completion status.
+     */
+    public static Task parseSavedTask(String taskData) {
         try {
             taskData = taskData.trim();
             Task task = null;
-            // Extract priority from saved task data using regex
+            // Extract priority using regex
             int loadedPriority = 0;
             Pattern priorityPattern = Pattern.compile(" \\(Priority: (-?\\d+)\\)");
             Matcher matcher = priorityPattern.matcher(taskData);
             if (matcher.find()) {
                 loadedPriority = Integer.parseInt(matcher.group(1));
             }
-            
+
             if (taskData.startsWith("[T]")) {
                 String description = taskData.substring(6);
                 // Remove trailing ' (Priority: X)' if present
@@ -204,7 +208,7 @@ public class Parser {
                     throw new YoChanException("Malformed event time data");
                 }
                 String from = timeParts[0];
-                String to = timeParts[1].substring(0, parts[1].length() - 1);
+                String to = timeParts[1].substring(0, timeParts[1].length() - 1);
                 task = new Event(description, convertSavedDateToInputFormat(from), convertSavedDateToInputFormat(to));
             }
             if (task != null) {
@@ -220,10 +224,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts a saved date string (format "MMM d yyyy HHmm") into the input format ("yyyy-MM-dd HHmm").
+     */
     private static String convertSavedDateToInputFormat(String savedDate) {
         try {
-            // Define the expected saved date format. Adjust the pattern if necessary.
-            DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(savedDate, savedFormat);
             return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } catch (DateTimeParseException e) {

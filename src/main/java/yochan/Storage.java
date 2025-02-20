@@ -75,7 +75,7 @@ public class Storage {
                     continue;
                 }
                 String taskData = line.substring(sepIndex + 2);
-                Task task = parseTaskFromSaved(taskData);
+                Task task = Parser.parseSavedTask(taskData);
                 if (task != null) {
                     tasks.add(task);
                 }
@@ -84,70 +84,5 @@ public class Storage {
             throw new YoChanException("Ough... Failed to load tasks! Cause: " + e.getMessage());
         }
         return tasks;
-    }
-
-    private Task parseTaskFromSaved(String taskData) {
-        try {
-            taskData = taskData.trim();
-            Task task = null;
-            // Extract priority from saved task data using regex
-            int loadedPriority = 0;
-            Pattern priorityPattern = Pattern.compile(" \\(Priority: (-?\\d+)\\)");
-            Matcher matcher = priorityPattern.matcher(taskData);
-            if (matcher.find()) {
-                loadedPriority = Integer.parseInt(matcher.group(1));
-            }
-
-            if (taskData.startsWith("[T]")) {
-                String description = taskData.substring(6);
-                // Remove trailing ' (Priority: X)' if present
-                description = description.replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                task = new Todo(description);
-            } else if (taskData.startsWith("[D]")) {
-                String[] parts = taskData.substring(6).split(" \\(by: ");
-                if (parts.length < 2) {
-                    throw new YoChanException("Malformed deadline task data");
-                }
-                // Remove trailing ' (Priority: X)' from description if present
-                String description = parts[0].replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                String by = parts[1].substring(0, parts[1].length() - 1);
-                task = new Deadline(description, convertSavedDateToInputFormat(by));
-            } else if (taskData.startsWith("[E]")) {
-                String[] parts = taskData.substring(6).split(" \\(from: ");
-                if (parts.length < 2) {
-                    throw new YoChanException("Malformed event task data");
-                }
-                // Remove trailing ' (Priority: X)' from description if present
-                String description = parts[0].replaceAll("\\s*\\(Priority: -?\\d+\\)", "");
-                String[] timeParts = parts[1].split(" to: ");
-                if (timeParts.length < 2) {
-                    throw new YoChanException("Malformed event time data");
-                }
-                String from = timeParts[0];
-                String to = timeParts[1].substring(0, timeParts[1].length() - 1);
-                task = new Event(description, convertSavedDateToInputFormat(from), convertSavedDateToInputFormat(to));
-            }
-            if (task != null) {
-                task.setPriority(loadedPriority);
-            }
-            if (task != null && taskData.contains("[X]")) {
-                task.mark();
-            }
-            return task;
-        } catch (YoChanException e) {
-            System.err.println("Ough! Failed to load task: " + taskData + ". Error: " + e.getMessage());
-            return null;
-        }
-    }
-
-    private String convertSavedDateToInputFormat(String savedDate) {
-        try {
-            DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(savedDate, savedFormat);
-            return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        } catch (DateTimeParseException e) {
-            System.err.println("Ough! Could not parse saved date: " + savedDate + ". Using original value.");
-            return savedDate;
-        }
     }
 }
