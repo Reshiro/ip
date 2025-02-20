@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the YoChan instance */
     public void setYoChan(YoChan d) {
         yoChan = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(getWelcomeMessage(), yoChanImage));
+        dialogContainer.getChildren().add(DialogBox.getYoChanDialog(getWelcomeMessage(), yoChanImage));
     }
 
     public String getWelcomeMessage() {
@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing YoChan's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
         assert response != null : "Chatbot response to user input should not be null";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, yoChanImage)
+                DialogBox.getYoChanDialog(response, yoChanImage)
         );
         userInput.clear();
     }

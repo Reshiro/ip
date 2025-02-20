@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import yochan.YoChan;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for YoChan using FXML.
  */
 public class Main extends Application {
 

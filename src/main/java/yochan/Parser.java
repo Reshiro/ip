@@ -134,15 +134,12 @@ public class Parser {
     }
 
     private static Command parseDelete(String args) throws YoChanException {
-        if (args.trim().isEmpty()) {
+        String[] tokens = tokenizeArgs(args);
+        if (tokens.length < 1) {
             throw new YoChanException("Ough! Please specify which task to delete!");
         }
-        try {
-            int taskNumber = Integer.parseInt(args.trim());
-            return new DeleteCommand(taskNumber);
-        } catch (NumberFormatException e) {
-            throw new YoChanException("Ough! Please provide a valid task number after 'delete'!");
-        }
+        return new DeleteCommand(
+                parseInteger(tokens[0], "Ough! Please provide a valid task number after 'delete'!"));
     }
 
     private static Command parseFind(String args) throws YoChanException {
@@ -153,18 +150,13 @@ public class Parser {
     }
 
     private static Command parsePriorityCommand(String args) throws YoChanException {
-        String[] tokens = args.trim().split("\\s+");
+        String[] tokens = tokenizeArgs(args);
         if (tokens.length < 2) {
             throw new YoChanException("Ough! The format should be: priority <taskNumber> <priorityLevel>!");
         }
-        try {
-            int taskNumber = Integer.parseInt(tokens[0]);
-            int priorityLevel = Integer.parseInt(tokens[1]);
-            return new PriorityCommand(taskNumber, priorityLevel);
-        } catch (NumberFormatException e) {
-            throw new YoChanException(
-                    "Ough! Please provide a valid task number and priority level after 'priority'! >:(");
-        }
+        return new PriorityCommand(parseInteger(
+                tokens[0], "Ough! Please provide a valid task number after 'priority'!"),
+                parseInteger(tokens[1], "Ough! Please provide a valid priority level after 'priority'!"));
     }
 
     /**
@@ -176,14 +168,13 @@ public class Parser {
         taskData = taskData.trim();
         try {
             int loadedPriority = extractPriority(taskData);
-            Task task = null;
-            if (taskData.startsWith("[T]")) {
-                task = parseTodoTask(taskData);
-            } else if (taskData.startsWith("[D]")) {
-                task = parseDeadlineTask(taskData);
-            } else if (taskData.startsWith("[E]")) {
-                task = parseEventTask(taskData);
-            }
+            String taskType = taskData.substring(0, 3);
+            Task task = switch (taskType) {
+            case "[T]" -> parseTodoTask(taskData);
+            case "[D]" -> parseDeadlineTask(taskData);
+            case "[E]" -> parseEventTask(taskData);
+            default -> null;
+            };
             if (task != null) {
                 task.setPriority(loadedPriority);
                 if (isTaskCompleted(taskData)) {
@@ -255,4 +246,15 @@ public class Parser {
         }
     }
 
+    private static String[] tokenizeArgs(String args) {
+        return args.trim().split("\\s+");
+    }
+
+    private static int parseInteger(String token, String errorMsg) throws YoChanException {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new YoChanException(errorMsg);
+        }
+    }
 }

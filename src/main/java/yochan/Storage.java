@@ -61,12 +61,11 @@ public class Storage {
                 if (line.trim().isEmpty()) {
                     continue;
                 }
-                int sepIndex = line.indexOf(". ");
-                if (sepIndex == -1) {
-                    System.err.println("Ough! Skipping malformed task line: " + line);
+                String taskData = extractTaskData(line);
+                if (taskData == null) {
+                    // Malformed line, skip
                     continue;
                 }
-                String taskData = line.substring(sepIndex + 2);
                 Task task = Parser.parseSavedTask(taskData);
                 if (task != null) {
                     tasks.add(task);
@@ -76,5 +75,15 @@ public class Storage {
             throw new YoChanException("Ough... Failed to load tasks! Cause: " + e.getMessage());
         }
         return tasks;
+    }
+
+    // Helper method to extract task data from a line
+    private String extractTaskData(String line) {
+        int sepIndex = line.indexOf(". ");
+        if (sepIndex == -1) {
+            System.err.println("Ough! Skipping malformed task line: " + line);
+            return null;
+        }
+        return line.substring(sepIndex + 2);
     }
 }
