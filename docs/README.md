@@ -3,7 +3,7 @@
 YoChan is a **desktop app for managing your tasks with a GUI**.
 
 YoChan can:
-- [X] Track **ToDo:** Tasks with no deadline
+- [X] Track **ToDos:** Tasks with no deadline
 - [X] Track **Deadlines:** Tasks with one deadline
 - [X] Track **Events:** Tasks that exist over a time interval
 
@@ -34,10 +34,10 @@ YoChan can:
 3. **Find** a task using `find <search_term>`
 
 4. Set a **Priority** for a task using `priority <task_number> <priority>`
-   It's up to you to determine a priority scale!
+   It's up to you to determine a priority scale! YoChan accepts negative numbers here.
 
 5. Once you're done using the app, just enter `bye`
    and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there 🦭.
 
 > Tip: you can use the list command to find task numbers!
-
+> Tip: YoChan is too lazy to deal with extra arguments!
