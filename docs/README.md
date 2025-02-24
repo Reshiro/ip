@@ -2,6 +2,11 @@
 
 YoChan is a **desktop app for managing your tasks with a GUI**.
 
+YoChan can:
+- [X] Track **ToDo:** Tasks with no deadline
+- [X] Track **Deadlines:** Tasks with one deadline
+- [X] Track **Events:** Tasks that exist over a time interval
+
 ## Getting Started
 
 1. Download the executable JAR file from [here](https://github.com/Reshiro/ip/releases/tag/A-Release)
@@ -12,11 +17,12 @@ YoChan is a **desktop app for managing your tasks with a GUI**.
    ```
 
 3. Begin adding tasks:
-   
+
    - To add a **ToDo** task, enter `todo <task_name>`
    - To add a **Deadline** task, enter `deadline <task_name> /by <yyyy-MM-dd HHmm>`
    - To add an **Event** task, enter `event <task_name> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>`
-   
+
+
 4. To list all of your tasks, simply enter `list`
 
 ## Other Features
@@ -31,5 +37,7 @@ YoChan is a **desktop app for managing your tasks with a GUI**.
    It's up to you to determine a priority scale!
 
 5. Once you're done using the app, just enter `bye`
-   and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there.
+   and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there 🦭.
+
+> Tip: you can use the list command to find task numbers!
 
