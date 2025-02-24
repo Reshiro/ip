@@ -14,8 +14,8 @@ YoChan is a **desktop app for managing your tasks with a GUI**.
 3. Begin adding tasks:
    
    - To add a **ToDo** task, enter `todo <task_name>`
-   - To add a **Deadline** task, enter `deadline <task_name> /by <YYYY-MM-DD HHMM>`
-   - To add an **Event** task, enter `event <task_name> /from <YYYY-MM-DD HHMM> /to <YYYY-MM-DD HHMM>`
+   - To add a **Deadline** task, enter `deadline <task_name> /by <yyyy-MM-dd HHmm>`
+   - To add an **Event** task, enter `event <task_name> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>`
    
 4. To list all of your tasks, simply enter `list`
 
