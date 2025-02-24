@@ -1,21 +1,35 @@
-# YoChan project template
+# YoChan User Guide
 
-This is a project for a greenfield Java project named _YoChan_. Given below are instructions on how to use it.
+YoChan is a **desktop app for managing your tasks with a GUI**.
 
-## Setting up in Intellij
+## Getting Started
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+1. Download the executable JAR file from [here](https://github.com/Reshiro/ip/releases/tag/A-Release)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/YoChan.java` file, right-click it, and choose `Run YoChan` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Ough... What do you want? 
+2. Run the following command in the JAR file's directory
+   ```terminal
+   java -jar YoChan.jar
    ```
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+3. Begin adding tasks:
+   
+   - To add a **ToDo** task, enter `todo <task_name>`
+   - To add a **Deadline** task, enter `deadline <task_name> /by <YYYY-MM-DD HHMM>`
+   - To add an **Event** task, enter `event <task_name> /from <YYYY-MM-DD HHMM> /to <YYYY-MM-DD HHMM>`
+   
+4. To list all of your tasks, simply enter `list`
+
+## Other Features
+
+1. **Mark** and **Unmark** a task as complete using `mark <task_number>` or `unmark <task_number>`
+
+2. **Delete** a task using `delete <task_number>`
+
+3. **Find** a task using `find <search_term>`
+
+4. Set a **Priority** for a task using `priority <task_number> <priority>`
+   It's up to you to determine a priority scale!
+
+5. Once you're done using the app, just enter `bye`
+   and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there.
+
