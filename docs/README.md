@@ -9,6 +9,7 @@ YoChan is a **desktop app for managing your tasks with a GUI**.
 2. Run the following command in the JAR file's directory
    ```terminal
    java -jar YoChan.jar
+   ```
 
 3. Begin adding tasks:
    
