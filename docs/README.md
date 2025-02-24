@@ -31,5 +31,5 @@ YoChan is a **desktop app for managing your tasks with a GUI**.
    It's up to you to determine a priority scale!
 
 5. Once you're done using the app, just enter `bye`
-   YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there.
+   and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there.
 
