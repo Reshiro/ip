@@ -40,4 +40,7 @@ YoChan can:
    and YoChan will save all of the tasks in your list! The next time you open up the app, everything will be there 🦭.
 
 > Tip: you can use the list command to find task numbers!
+
 > Tip: YoChan is too lazy to deal with extra arguments!
+
+
