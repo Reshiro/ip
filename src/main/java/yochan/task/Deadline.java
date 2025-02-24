@@ -27,7 +27,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDateTime.parse(by, INPUT_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new YoChanException("Ough! Please use the format: YYYY-MM-DD HHMM (e.g., 2024-03-25 1430)");
+            throw new YoChanException("Ough! Please use the format: yyyy-MM-dd HHmm (e.g., 2024-03-25 1430)");
         }
     }
 

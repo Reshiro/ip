@@ -108,7 +108,7 @@ public class Parser {
         }
         String[] parts = details.split(" /by ");
         if (parts.length != 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
-            throw new YoChanException("Ough! The format should be: deadline <description> /by <YYYY-MM-DD HHMM>");
+            throw new YoChanException("Ough! The format should be: deadline <description> /by <yyyy-MM-dd HHmm>");
         }
         return new AddCommand(new Deadline(parts[0].trim(), parts[1].trim()));
     }
@@ -124,7 +124,7 @@ public class Parser {
         String[] parts = details.split(" /from ");
         if (parts.length != 2 || parts[0].trim().isEmpty()) {
             throw new YoChanException(
-                    "Ough! The format should be: event <description> /from <YYYY-MM-DD HHMM> /to <YYYY-MM-DD HHMM>");
+                    "Ough! The format should be: event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>");
         }
         String[] timeParts = parts[1].split(" /to ");
         if (timeParts.length != 2 || timeParts[0].trim().isEmpty() || timeParts[1].trim().isEmpty()) {
